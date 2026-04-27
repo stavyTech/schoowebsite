@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard - StarKid Digital Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active">Dashboard</a></li>
+        <li><a href="#" onclick="switchTab('grades-tab')">Grade Management</a></li>
+        <li><a href="#" onclick="switchTab('attendance-tab')">Attendance</a></li>
+        <li><a href="#" onclick="switchTab('reports-tab')">Class Reports</a></li>
+        <li><a href="#" onclick="logout()" style="color: #E74C3C;">Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <div class="dashboard-header">
+        <div>
+          <h1>Teacher Portal</h1>
+          <p id="userGreeting" style="color: var(--light-text); margin-top: 0.5rem;"></p>
+        </div>
+        <button class="btn btn-primary" onclick="logout()">Logout</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Classes</div>
+          <div class="stat-value">3</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">Total Students</div>
+          <div class="stat-value">85</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-label">Grades Entered</div>
+          <div class="stat-value">42</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">Avg Attendance</div>
+          <div class="stat-value">92%</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('grades-tab')">Grade Management</button>
+        <button class="tab-btn" onclick="switchTab('attendance-tab')">Attendance</button>
+        <button class="tab-btn" onclick="switchTab('reports-tab')">Class Reports</button>
+      </div>
+
+      <!-- Grade Management Tab -->
+      <div id="grades-tab" class="tab-content active">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Term</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Doe</td>
+                <td>Mathematics</td>
+                <td><input type="number" min="0" max="100" value="92" style="width: 60px; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px;"></td>
+                <td>Term 1</td>
+                <td><button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Save</button></td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>Mathematics</td>
+                <td><input type="number" min="0" max="100" value="88" style="width: 60px; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px;"></td>
+                <td>Term 1</td>
+                <td><button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Save</button></td>
+              </tr>
+              <tr>
+                <td>Mike Johnson</td>
+                <td>Mathematics</td>
+                <td><input type="number" min="0" max="100" value="95" style="width: 60px; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px;"></td>
+                <td>Term 1</td>
+                <td><button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Save</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Attendance Tab -->
+      <div id="attendance-tab" class="tab-content">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Doe</td>
+                <td>April 20, 2026</td>
+                <td>
+                  <select style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer;">
+                    <option value="present">Present</option>
+                    <option value="absent">Absent</option>
+                    <option value="late">Late</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>April 20, 2026</td>
+                <td>
+                  <select style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer;">
+                    <option value="present" selected>Present</option>
+                    <option value="absent">Absent</option>
+                    <option value="late">Late</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Mike Johnson</td>
+                <td>April 20, 2026</td>
+                <td>
+                  <select style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer;">
+                    <option value="present">Present</option>
+                    <option value="absent" selected>Absent</option>
+                    <option value="late">Late</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 2rem; padding: 1rem;">Save Attendance</button>
+      </div>
+
+      <!-- Class Reports Tab -->
+      <div id="reports-tab" class="tab-content">
+        <div style="display: grid; gap: 2rem;">
+          <div style="padding: 2rem; background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-yellow);">
+            <h3 style="color: var(--dark-text); margin-bottom: 1rem;">Submit Class Report</h3>
+            <textarea placeholder="Enter your class report here..." style="width: 100%; padding: 1rem; border: 2px solid var(--secondary-yellow); border-radius: 8px; font-family: Arial, sans-serif; resize: vertical; min-height: 150px;"></textarea>
+            <button class="btn btn-primary" style="margin-top: 1rem; padding: 0.75rem 1.5rem;">Submit Report</button>
+          </div>
+
+          <div style="padding: 2rem; background-color: var(--light-bg); border-radius: 10px;">
+            <h3 style="color: var(--dark-text); margin-bottom: 1.5rem;">Recent Reports</h3>
+            <div style="display: grid; gap: 1rem;">
+              <div style="padding: 1rem; background-color: var(--white); border-radius: 8px; border-left: 4px solid var(--primary-orange);">
+                <p style="font-weight: 600; color: var(--dark-text);">Class Performance Summary - April 20, 2026</p>
+                <p style="color: var(--light-text); font-size: 0.9rem; margin-top: 0.5rem;">Overall class performance is excellent with 90% average score.</p>
+              </div>
+              <div style="padding: 1rem; background-color: var(--white); border-radius: 8px; border-left: 4px solid var(--primary-orange);">
+                <p style="font-weight: 600; color: var(--dark-text);">Attendance Report - April 19, 2026</p>
+                <p style="color: var(--light-text); font-size: 0.9rem; margin-top: 0.5rem;">Attendance rate is 92% with 3 absences recorded.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      const user = getCurrentUser();
+      if (user) {
+        document.getElementById('userGreeting').textContent = `Welcome, ${user.name}!`;
+      }
+    });
+  </script>
+</body>
+</html>

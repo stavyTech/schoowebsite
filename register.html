@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration - StarKids Digital Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="auth-header">
+        <h2>Student Registration</h2>
+        <p>Create your student account</p>
+      </div>
+      
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" required placeholder="Enter first name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" required placeholder="Enter last name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter email address">
+        </div>
+
+         <div class="form-group">
+          <label for="password">password</label>
+          <input type="password" id="email" name="password" placeholder="Enter password">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="dateOfBirth">Date of Birth *</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="enrollmentDate">Enrollment Date</label>
+          <input type="date" id="enrollmentDate" name="enrollmentDate">
+        </div>
+
+        <div id="errorMessage" class="error hidden"></div>
+        <div id="successMessage" class="success hidden"></div>
+
+        
+        <div class="form-group">
+          <label for="role">Register As</label>
+          <select id="role" name="role" required>
+            <option value="">Select your role</option>
+            <option value="student">Student</option>
+            <option value="parent">Parent</option>
+            <option value="teacher">Teacher</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-orange" style="width: 100%; padding: 1rem;">Create Account</button>
+      </form>
+
+      <p style="text-align: center; margin-top: 1.5rem; color: var(--light-text);">
+        Already have an account? <a href="login.html" style="color: var(--primary-orange); font-weight: 600; text-decoration: none;">Sign in here</a>
+      </p>
+
+      <p style="text-align: center; margin-top: 1rem; color: var(--light-text);">
+        <a href="index.html" style="color: var(--primary-orange); font-weight: 600; text-decoration: none;">← Back to Home</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Set today's date as default for enrollment date
+    document.getElementById('enrollmentDate').valueAsDate = new Date();
+
+    function handleRegister(event) {
+      event.preventDefault();
+      
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const dateOfBirth = document.getElementById('dateOfBirth').value;
+      const gender = document.getElementById('gender').value;
+      const enrollmentDate = document.getElementById('enrollmentDate').value;
+      
+      const errorDiv = document.getElementById('errorMessage');
+      const successDiv = document.getElementById('successMessage');
+
+      if (!firstName || !lastName || !dateOfBirth) {
+        errorDiv.textContent = 'Please fill in all required fields';
+        errorDiv.classList.remove('hidden');
+        successDiv.classList.add('hidden');
+        return;
+      }
+
+      // Create new student
+      const newStudent = {
+        id: AppState.students.length + 1,
+        name: `${firstName} ${lastName}`,
+        email: email || `${firstName.toLowerCase()}@school.com`,
+        class: 'Grade 10',
+        dob: dateOfBirth,
+        gender: gender,
+        status: 'active',
+        enrollmentDate: enrollmentDate
+      };
+
+      AppState.students.push(newStudent);
+      AppState.saveToLocalStorage();
+
+      // Create login user
+      const user = login(newStudent.email, 'password123', 'student');
+      
+      if (user) {
+        errorDiv.classList.add('hidden');
+        successDiv.textContent = 'Registration successful! Redirecting to your dashboard...';
+        successDiv.classList.remove('hidden');
+        
+        setTimeout(() => {
+          window.location.href = 'student-dashboard.html';
+        }, 2000);
+      } else {
+        errorDiv.textContent = 'Registration failed. Please try again.';
+        errorDiv.classList.remove('hidden');
+        successDiv.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
