@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - StarKids Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active">Dashboard</a></li>
+        <li><a href="#" onclick="switchTab('profile-tab')">Profile</a></li>
+        <li><a href="#" onclick="switchTab('grades-tab')">Grades</a></li>
+        <li><a href="#" onclick="switchTab('attendance-tab')">Attendance</a></li>
+        <li><a href="#" onclick="switchTab('announcements-tab')">Announcements</a></li>
+        <li><a href="#" onclick="switchTab('fees-tab')">Fees</a></li>
+        <li><a href="#" onclick="logout()" style="color: #E74C3C;">Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <div class="dashboard-header">
+        <div>
+          <h1>Student Portal</h1>
+          <p id="userGreeting" style="color: var(--light-text); margin-top: 0.5rem;"></p>
+        </div>
+        <button class="btn btn-primary" onclick="logout()">Logout</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Average Grade</div>
+          <div class="stat-value" id="avgGrade">91.7%</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">Attendance</div>
+          <div class="stat-value">95%</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-label">Announcements</div>
+          <div class="stat-value" id="announcementCount">3</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">Pending Fees</div>
+          <div class="stat-value">$500</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('profile-tab')">Profile</button>
+        <button class="tab-btn" onclick="switchTab('grades-tab')">Grades</button>
+        <button class="tab-btn" onclick="switchTab('attendance-tab')">Attendance</button>
+        <button class="tab-btn" onclick="switchTab('announcements-tab')">Announcements</button>
+        <button class="tab-btn" onclick="switchTab('fees-tab')">Fees</button>
+      </div>
+
+      <!-- Profile Tab -->
+      <div id="profile-tab" class="tab-content active">
+        <div class="table-container">
+          <div style="padding: 2rem;">
+            <h2 style="margin-bottom: 2rem;">Student Profile</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+              <div>
+                <p style="color: var(--light-text); font-size: 0.9rem;">Full Name</p>
+                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;" id="profileName">John Doe</p>
+                
+                <p style="color: var(--light-text); font-size: 0.9rem;">Email</p>
+                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;" id="profileEmail">john@example.com</p>
+                
+                <p style="color: var(--light-text); font-size: 0.9rem;">Class</p>
+                <p style="font-size: 1.2rem; font-weight: 600;" id="profileClass">Grade 10</p>
+              </div>
+              <div>
+                <p style="color: var(--light-text); font-size: 0.9rem;">Date of Birth</p>
+                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;">January 15, 2010</p>
+                
+                <p style="color: var(--light-text); font-size: 0.9rem;">Enrollment Date</p>
+                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem;">September 1, 2024</p>
+                
+                <p style="color: var(--light-text); font-size: 0.9rem;">Status</p>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--secondary-green);">Active</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grades Tab -->
+      <div id="grades-tab" class="tab-content">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Grade</th>
+                <th>Term</th>
+              </tr>
+            </thead>
+            <tbody id="gradesTable">
+              <tr>
+                <td>Mathematics</td>
+                <td style="font-weight: 600; color: var(--primary-blue);">92%</td>
+                <td><span class="badge badge-success">A</span></td>
+                <td>Term 1</td>
+              </tr>
+              <tr>
+                <td>English</td>
+                <td style="font-weight: 600; color: var(--primary-blue);">88%</td>
+                <td><span class="badge badge-success">B+</span></td>
+                <td>Term 1</td>
+              </tr>
+              <tr>
+                <td>Science</td>
+                <td style="font-weight: 600; color: var(--primary-blue);">95%</td>
+                <td><span class="badge badge-success">A</span></td>
+                <td>Term 1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Attendance Tab -->
+      <div id="attendance-tab" class="tab-content">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceTable">
+              <tr>
+                <td>April 20, 2026</td>
+                <td><span class="badge badge-success">Present</span></td>
+              </tr>
+              <tr>
+                <td>April 19, 2026</td>
+                <td><span class="badge badge-success">Present</span></td>
+              </tr>
+              <tr>
+                <td>April 18, 2026</td>
+                <td><span class="badge badge-danger">Absent</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Announcements Tab -->
+      <div id="announcements-tab" class="tab-content">
+        <div id="announcementsList" style="display: grid; gap: 1.5rem;">
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1)); border-radius: 10px; border-left: 4px solid var(--secondary-green);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <h3 style="color: var(--dark-text);">School Holiday</h3>
+              <span style="color: var(--light-text); font-size: 0.9rem;">April 20, 2026</span>
+            </div>
+            <p style="color: var(--light-text);">School will be closed on April 25-26</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.1)); border-radius: 10px; border-left: 4px solid var(--secondary-yellow);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <h3 style="color: var(--dark-text);">Sports Day</h3>
+              <span style="color: var(--light-text); font-size: 0.9rem;">April 19, 2026</span>
+            </div>
+            <p style="color: var(--light-text);">Annual sports day on May 1st</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(91, 155, 213, 0.1), rgba(46, 92, 138, 0.1)); border-radius: 10px; border-left: 4px solid var(--primary-blue);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <h3 style="color: var(--dark-text);">Parent-Teacher Meeting</h3>
+              <span style="color: var(--light-text); font-size: 0.9rem;">April 18, 2026</span>
+            </div>
+            <p style="color: var(--light-text);">Scheduled for May 5th</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fees Tab -->
+      <div id="fees-tab" class="tab-content">
+        <div style="display: grid; gap: 1.5rem;">
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-yellow);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="color: var(--dark-text);">Tuition Fee</h3>
+              <span class="badge badge-warning">Pending</span>
+            </div>
+            <p style="font-size: 1.5rem; font-weight: bold; color: var(--secondary-yellow); margin-bottom: 0.5rem;">$500</p>
+            <p style="color: var(--light-text); font-size: 0.9rem;">Due: May 1, 2026</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-green);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="color: var(--dark-text);">Activity Fee</h3>
+              <span class="badge badge-success">Paid</span>
+            </div>
+            <p style="font-size: 1.5rem; font-weight: bold; color: var(--secondary-green); margin-bottom: 0.5rem;">$100</p>
+            <p style="color: var(--light-text); font-size: 0.9rem;">Paid: April 15, 2026</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 2rem; padding: 1rem;">Pay Outstanding Fees</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize dashboard
+    window.addEventListener('DOMContentLoaded', function() {
+      const user = getCurrentUser();
+      if (user) {
+        document.getElementById('userGreeting').textContent = `Welcome, ${user.name}!`;
+      }
+    });
+  </script>
+</body>
+</html>

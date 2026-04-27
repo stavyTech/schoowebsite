@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent Dashboard - StarKids Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active">Dashboard</a></li>
+        <li><a href="#" onclick="switchTab('performance-tab')">Performance</a></li>
+        <li><a href="#" onclick="switchTab('attendance-tab')">Attendance</a></li>
+        <li><a href="#" onclick="switchTab('fees-tab')">Fees</a></li>
+        <li><a href="#" onclick="switchTab('announcements-tab')">Announcements</a></li>
+        <li><a href="#" onclick="logout()" style="color: #E74C3C;">Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <div class="dashboard-header">
+        <div>
+          <h1>Parent Portal</h1>
+          <p id="userGreeting" style="color: var(--light-text); margin-top: 0.5rem;"></p>
+        </div>
+        <button class="btn btn-primary" onclick="logout()">Logout</button>
+      </div>
+
+      <!-- Child Selection -->
+      <div class="table-container">
+        <div style="padding: 1.5rem;">
+          <label style="font-weight: 600; color: var(--dark-text); margin-right: 1rem;">Select Child:</label>
+          <select id="childSelect" style="padding: 0.75rem; border: 2px solid var(--primary-blue); border-radius: 8px; font-size: 1rem; cursor: pointer;">
+            <option value="1">John Doe - Grade 10</option>
+            <option value="2">Jane Doe - Grade 8</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Average Score</div>
+          <div class="stat-value">90%</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">Attendance</div>
+          <div class="stat-value">95%</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">Outstanding Fees</div>
+          <div class="stat-value">$500</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-label">Announcements</div>
+          <div class="stat-value">5</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('performance-tab')">Performance</button>
+        <button class="tab-btn" onclick="switchTab('attendance-tab')">Attendance</button>
+        <button class="tab-btn" onclick="switchTab('fees-tab')">Fees</button>
+        <button class="tab-btn" onclick="switchTab('announcements-tab')">Announcements</button>
+      </div>
+
+      <!-- Performance Tab -->
+      <div id="performance-tab" class="tab-content active">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Trend</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mathematics</td>
+                <td style="font-weight: 600; color: var(--primary-blue);">92%</td>
+                <td>📈 Improving</td>
+              </tr>
+              <tr>
+                <td>English</td>
+                <td style="font-weight: 600; color: var(--primary-blue);">88%</td>
+                <td>📈 Improving</td>
+              </tr>
+              <tr>
+                <td>Science</td>
+                <td style="font-weight: 600; color: var(--primary-blue);">95%</td>
+                <td>➡️ Stable</td>
+              </tr>
+              <tr>
+                <td>History</td>
+                <td style="font-weight: 600; color: var(--primary-blue);">85%</td>
+                <td>📉 Declining</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Attendance Tab -->
+      <div id="attendance-tab" class="tab-content">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-green); text-align: center;">
+            <p style="font-size: 2rem; font-weight: bold; color: var(--secondary-green);">45</p>
+            <p style="color: var(--light-text);">Present</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(192, 57, 43, 0.1)); border-radius: 10px; border: 2px solid #E74C3C; text-align: center;">
+            <p style="font-size: 2rem; font-weight: bold; color: #E74C3C;">2</p>
+            <p style="color: var(--light-text);">Absent</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-yellow); text-align: center;">
+            <p style="font-size: 2rem; font-weight: bold; color: var(--secondary-yellow);">3</p>
+            <p style="color: var(--light-text);">Late</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(91, 155, 213, 0.1), rgba(46, 92, 138, 0.1)); border-radius: 10px; border: 2px solid var(--primary-blue); text-align: center;">
+            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-blue);">50</p>
+            <p style="color: var(--light-text);">Total Days</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fees Tab -->
+      <div id="fees-tab" class="tab-content">
+        <div style="display: grid; gap: 1.5rem;">
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-yellow);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="color: var(--dark-text);">Tuition Fee</h3>
+              <span class="badge badge-warning">Pending</span>
+            </div>
+            <p style="font-size: 1.5rem; font-weight: bold; color: var(--secondary-yellow); margin-bottom: 0.5rem;">$500</p>
+            <p style="color: var(--light-text); font-size: 0.9rem;">Due: May 1, 2026</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-green);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="color: var(--dark-text);">Activity Fee</h3>
+              <span class="badge badge-success">Paid</span>
+            </div>
+            <p style="font-size: 1.5rem; font-weight: bold; color: var(--secondary-green); margin-bottom: 0.5rem;">$100</p>
+            <p style="color: var(--light-text); font-size: 0.9rem;">Paid: April 15, 2026</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1)); border-radius: 10px; border: 2px solid var(--secondary-green);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="color: var(--dark-text);">Library Fee</h3>
+              <span class="badge badge-success">Paid</span>
+            </div>
+            <p style="font-size: 1.5rem; font-weight: bold; color: var(--secondary-green); margin-bottom: 0.5rem;">$50</p>
+            <p style="color: var(--light-text); font-size: 0.9rem;">Paid: April 10, 2026</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 2rem; padding: 1rem;">Pay Fees Online</button>
+      </div>
+
+      <!-- Announcements Tab -->
+      <div id="announcements-tab" class="tab-content">
+        <div style="display: grid; gap: 1.5rem;">
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(108, 58, 122, 0.1)); border-radius: 10px; border-left: 4px solid var(--primary-purple);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <h3 style="color: var(--dark-text);">School Holiday</h3>
+              <span style="color: var(--light-text); font-size: 0.9rem;">April 20, 2026</span>
+            </div>
+            <p style="color: var(--light-text);">School will be closed on April 25-26</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(108, 58, 122, 0.1)); border-radius: 10px; border-left: 4px solid var(--primary-purple);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <h3 style="color: var(--dark-text);">Sports Day</h3>
+              <span style="color: var(--light-text); font-size: 0.9rem;">April 19, 2026</span>
+            </div>
+            <p style="color: var(--light-text);">Annual sports day on May 1st</p>
+          </div>
+          <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(108, 58, 122, 0.1)); border-radius: 10px; border-left: 4px solid var(--primary-purple);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <h3 style="color: var(--dark-text);">Parent-Teacher Meeting</h3>
+              <span style="color: var(--light-text); font-size: 0.9rem;">April 18, 2026</span>
+            </div>
+            <p style="color: var(--light-text);">Scheduled for May 5th</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      const user = getCurrentUser();
+      if (user) {
+        document.getElementById('userGreeting').textContent = `Welcome, ${user.name}!`;
+      }
+    });
+  </script>
+</body>
+</html>
