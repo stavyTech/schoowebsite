@@ -19,9 +19,10 @@ const AppState = {
   initializeMockData() {
     // Mock Students
     this.students = [
-      { id: 1, name: 'John Doe', email: 'john@example.com', class: 'Grade 10', dob: '2010-01-15', status: 'active', enrollmentDate: '2024-09-01' },
-      { id: 2, name: 'Jane Smith', email: 'jane@example.com', class: 'Grade 9', dob: '2011-05-20', status: 'active', enrollmentDate: '2024-09-01' },
-      { id: 3, name: 'Mike Johnson', email: 'mike@example.com', class: 'Grade 10', dob: '2009-12-10', status: 'active', enrollmentDate: '2024-09-01' },
+       { id: 1, name: 'patience orji', email: 'patienceorji613@.com', class: 'Grade 10', dob: '2010-01-15', status: 'active', enrollmentDate: '2024-09-01' },
+      { id: 2, name: 'John Doe', email: 'john@example.com', class: 'Grade 10', dob: '2010-01-15', status: 'active', enrollmentDate: '2024-09-01' },
+      { id: 3, name: 'Jane Smith', email: 'jane@example.com', class: 'Grade 9', dob: '2011-05-20', status: 'active', enrollmentDate: '2024-09-01' },
+      { id: 4, name: 'Mike Johnson', email: 'mike@example.com', class: 'Grade 10', dob: '2009-12-10', status: 'active', enrollmentDate: '2024-09-01' },
     ];
 
     // Mock Parents

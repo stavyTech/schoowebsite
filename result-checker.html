@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> StarKidsResult Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f8f9ff, #eef3ff);
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      color: #ff8c42;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #ff8c42;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .result-box {
+      margin-top: 30px;
+      padding: 25px;
+      background: #fafafa;
+      border-radius: 15px;
+      display: none;
+    }
+
+    .student-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f4ff;
+    }
+
+    .print-btn {
+      background: #5b9bd5;
+      margin-top: 20px;
+    }
+
+    @media(max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>StarKids Result Checker</h1>
+    <p class="subtitle">Integrated school portal result management system</p>
+
+    <div class="grid">
+      <input id="studentId" placeholder="Student ID (1001,1002,1003)" />
+      <select id="session">
+        <option>2025/2026</option>
+      </select>
+      <select id="term">
+        <option>First Term</option>
+        <option>Second Term</option>
+        <option>Third Term</option>
+      </select>
+      <input id="pin" placeholder="Scratch Card PIN (12345)" />
+    </div>
+
+    <button onclick="checkResult()">Check Result</button>
+
+    <div id="resultBox" class="result-box">
+      <div class="student-header">
+        <div>
+          <h2 id="studentName"></h2>
+          <p id="studentClass"></p>
+        </div>
+        <div>
+          <h3 id="studentAverage"></h3>
+          <p id="studentPosition"></p>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Score</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="resultTable"></tbody>
+      </table>
+
+      <p><strong>Teacher Comment:</strong> <span id="teacherComment"></span></p>
+      <p><strong>Principal Comment:</strong> <span id="principalComment"></span></p>
+
+      <button class="print-btn" onclick="window.print()">Print Result</button>
+    </div>
+  </div>
+
+  <script>
+    const students = {
+      '1001': {
+        name: 'patience orji',
+        class: 'Grade 10',
+        average: '86.7%',
+        position: '2nd Position',
+        teacherComment: 'Excellent performance',
+        principalComment: 'Keep it up',
+        subjects: [
+          { subject: 'Mathematics', score: 90, grade: 'A' },
+          { subject: 'English', score: 85, grade: 'A' },
+          { subject: 'Biology', score: 85, grade: 'A' }
+        ]
+      },
+      '1002': {
+        name: 'Jane Smith',
+        class: 'Grade 9',
+        average: '78.5%',
+        position: '5th Position',
+        teacherComment: 'Very good effort',
+        principalComment: 'Can do even better',
+        subjects: [
+          { subject: 'Mathematics', score: 75, grade: 'B' },
+          { subject: 'English', score: 80, grade: 'A' },
+          { subject: 'Physics', score: 81, grade: 'A' }
+        ]
+      },
+      '1003': {
+        name: 'Mike Johnson',
+        class: 'Grade 10',
+        average: '69%',
+        position: '12th Position',
+        teacherComment: 'Needs improvement',
+        principalComment: 'Focus more next term',
+        subjects: [
+          { subject: 'Chemistry', score: 68, grade: 'C' },
+          { subject: 'English', score: 70, grade: 'B' },
+          { subject: 'Mathematics', score: 69, grade: 'C' }
+        ]
+      }
+    };
+
+    function checkResult() {
+      const studentId = document.getElementById('studentId').value;
+      const pin = document.getElementById('pin').value;
+      const student = students[studentId];
+
+      if (!student) {
+        alert('Student result not found');
+        return;
+      }
+
+      if (pin !== '12345') {
+        alert('Invalid scratch card PIN');
+        return;
+      }
+
+      document.getElementById('studentName').innerText = student.name;
+      document.getElementById('studentClass').innerText = student.class;
+      document.getElementById('studentAverage').innerText = student.average;
+      document.getElementById('studentPosition').innerText = student.position;
+      document.getElementById('teacherComment').innerText = student.teacherComment;
+      document.getElementById('principalComment').innerText = student.principalComment;
+
+      const table = document.getElementById('resultTable');
+      table.innerHTML = '';
+
+      student.subjects.forEach(sub => {
+        table.innerHTML += `
+          <tr>
+            <td>${sub.subject}</td>
+            <td>${sub.score}</td>
+            <td>${sub.grade}</td>
+          </tr>
+        `;
+      });
+
+      document.getElementById('resultBox').style.display = 'block';
+    };
+  </script>
+</body>
+</html>
