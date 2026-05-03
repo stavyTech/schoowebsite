@@ -248,3 +248,57 @@ window.getStudentAttendance = getStudentAttendance;
 window.getStudentFees = getStudentFees;
 window.getParentById = getParentById;
 window.getTeacherById = getTeacherById;
+
+// reselt// checker specific functions/
+// tesult checker///
+
+const results = [
+  {
+    studentId: 1,
+    session: "2025/2026",
+    term: "First Term",
+    subjects: [
+      { subject: "Mathematics", ca: 18, exam: 72, total: 90, grade: "A" },
+      { subject: "English", ca: 15, exam: 70, total: 85, grade: "A" },
+      { subject: "Biology", ca: 17, exam: 68, total: 85, grade: "A" }
+    ],
+    totalScore: 260,
+    average: 86.7,
+    position: "2nd",
+    teacherComment: "Excellent performance",
+    principalComment: "Keep it up"
+  }
+];
+
+// result finder function
+
+function checkResult(studentId, session, term) {
+  return results.find(
+    result =>
+      result.studentId == studentId &&
+      result.session === session &&
+      result.term === term
+  );
+}
+
+window.print();
+
+// add token or authentication to the result checker function//
+const validPins = ["1234567890", "9876543210"];
+
+// validation function for the result checker//
+if (!validPins.includes(pin)) {
+   alert("Invalid scratch card PIN");
+   return;
+}
+
+// grades calculation function for the result checker//
+function calculateGrade(score) {
+   if (score >= 70) return "A";
+   if (score >= 60) return "B";
+   if (score >= 50) return "C";
+   if (score >= 45) return "D";
+   if (score >= 40) return "E";
+   return "F";
+}
+
